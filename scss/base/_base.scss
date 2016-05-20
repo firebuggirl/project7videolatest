@@ -1,0 +1,196 @@
+*, *:before, *:after {
+  @include border_box;
+}
+
+
+body {
+  font-family: 'Nunito', sans-serif;
+  color: #384047;
+  background-color: $navy;
+}
+.wrapper{
+  @include wrapper--90_padding;
+  background-color: $ashy-beige;
+  border-radius: 8px;
+
+}
+#my_video{
+  @include video--center;
+}
+
+div#video_controls_bar{
+   background: $navy;
+   padding:10px;
+   color: $white;
+   opacity: 0.7;
+   font-family: $futura-font-stack;
+   z-index: 100;
+  &:hover{
+    opacity: 1;
+  }
+}
+
+
+
+#seek{
+  display: block;
+  width: auto;
+  height: 10px;
+  background-color: $red;
+  opacity: 0.7;
+}
+
+#seekslider {
+	position: absolute;
+	width: 0;
+	height: 100%;
+}
+
+#progress {
+  width: 0;
+  position: absolute;
+	-webkit-appearance: none;
+	background-color: $ashy-beige;
+	height: 10px;
+	z-index: 5;
+	pointer-events: none;
+}
+
+
+
+#flex--wrapper{
+  @include flex;
+  @include flex_justify_space_between;
+  @include flex_align_center;
+  margin-top: 5px;
+}
+
+
+button#playpausebtn{
+	@include play-pause;
+  &:hover{
+    opacity: 1;
+  }
+}
+
+
+.time{
+  margin-top: 4px;
+  position: absolute;
+  opacity: 0.7;
+  &:hover{
+    opacity: 1;
+  }
+}
+#durtimetext{
+  margin-left: 9px;
+}
+
+#pause{
+  display: none;
+}
+#stop{
+  @include stop;
+  opacity: 0.7;
+  &:hover{
+    opacity: 1;
+  }
+}
+button#cc{
+	@include cc;
+  background:url(../icons/cc.png);
+  opacity: 0.7;
+  &:hover{
+    opacity: 1;
+  }
+}
+
+button#mutebtn{
+	@include mutebtn;
+  background:url(../icons/volume-off-icon.png);
+  opacity: 0.7;
+  &:hover{
+    opacity: 1;
+  }
+}
+
+
+
+input#volumeslider{
+  width: 80px;
+  margin-top: 10px;
+  opacity: 0.7;
+  &:hover{
+    opacity: 1;
+  }
+}
+
+input[type='range'] {
+    @include input--type_range;
+	  border: $off-white2 3px solid;
+    height: 4px;
+}
+
+
+input[type='range']::-webkit-slider-thumb {
+    background: $red;
+    @include input--type_range--webkit--thumb;
+}
+/* Firefox */
+input[type='range']::-moz-range-thumb {
+    background: $red;
+    @include input--type_range--moz--thumb;
+}
+
+input[type=range]:focus {
+  outline: none; /* Removes the blue border. ..should do some kind of focus styling for accessibility reasons..from CSS Tricks */
+}
+
+/* IE */
+input[type=range]::-ms-track {
+  @include input--type_range--ms;
+}
+
+
+
+#fullscreenbtn{
+  background-color: transparent;
+  border: none;
+  opacity: 0.7;
+  &:hover{
+    opacity: 1;
+  }
+}
+
+
+
+
+#flex--margin_right{
+  margin-right: 50%;
+  @include flex;
+}
+
+#curtimetext{
+  margin-left: -42px;
+}
+
+#text{
+  height: 100%;
+}
+
+p{
+  margin-top:40px;
+  font-size: 24px;
+}
+
+/* fullscreen */
+html:-ms-fullscreen {
+	width:100%;
+}
+:-webkit-full-screen {
+	background-color:transparent;
+}
+
+.highlight{
+  color: $red;
+}

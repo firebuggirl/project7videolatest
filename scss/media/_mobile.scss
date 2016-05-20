@@ -1,0 +1,55 @@
+
+
+@media (max-width: 435px){
+  body{
+    background-color: $ashy-beige;
+  }
+  .wrapper{
+    max-width: 100%;
+  }
+
+  #video-container{
+    border: 10px solid $navy;
+  }
+  button#playpausebtn,
+  button#mutebtn{
+    width: 18px;
+    height: 24px;
+  }
+  input#volumeslider{
+    display: none;
+  }
+   #durtimetext{
+    display: none;
+    margin-left: 10px;
+  }
+
+  #curtimetext{
+    margin-left: -32px;
+  }
+  input#volumeslider{
+    width: 40px;
+  }
+  p {
+	margin-top: 20px;
+	font-size: 16px;
+}
+  #text{
+   height: 100vh;
+}
+#flex--margin_right{
+  margin-right: 0%;
+}
+}
+
+@media (max-width: 320px){
+  p{
+    font-size: 13px;
+  }
+  #curtimetext{
+    margin-left: -40px;
+  }
+  #durtimetext{
+    display: none;
+  }
+}
