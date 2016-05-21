@@ -1429,7 +1429,7 @@ $vidContainer.mouseleave(function () {
 
 
 
-//Add hightlights to text as video playpausebtn
+//Add hightlights to text as video plays
 
     $vid.on("timeupdate", function() {
   		var $videoTime = $vid[0].currentTime;
@@ -1475,22 +1475,24 @@ $vidContainer.mouseleave(function () {
   	});
 
 
-
-
   $("span").click(function(){
     var curTime = $(this).attr("data-start"); //Set/get current time of span that is clicked on
     vid.currentTime = curTime; //Note: The currentTime property represents the current playback position in seconds.
   });                          //https://msdn.microsoft.com/en-us/library/hh924823%28v=vs.85%29.aspx
 
-var vid, playbtn, stop, seekslider, progress, curtimetext, durtimetext, mutebtn, volumeslider, fullscreenbtn, cc;
+var vid, playbtn, pause, play, stop, seekslider, progress, seekbar ,curtimetext, durtimetext, mutebtn, volumeslider, fullscreenbtn, cc;
 function intializePlayer(){
 	// Set object references
 	vid = document.getElementById("my_video");
 	playbtn = document.getElementById("playpausebtn");
+	pause = document.getElementById("pause");
+	play = document.getElementById("play");
   stop = document.getElementById('stop');
   seekslider = document.getElementById("seekslider");
 
 	progress = document.getElementById("progress");
+
+	seekbar = document.getElementById("seek-bar");
 
   curtimetext = document.getElementById("curtimetext");
 	durtimetext = document.getElementById("durtimetext");
@@ -1498,11 +1500,15 @@ function intializePlayer(){
   volumeslider = document.getElementById("volumeslider");
   fullscreenbtn = document.getElementById("fullscreenbtn");
   cc = document.getElementById('cc');
-  //span = document.getElementsByTagName('span')[0].getAttribute("data-start");
   //var bufferedTimeRanges = vid.buffered;
+
+
 	// Add event listeners
 	playbtn.addEventListener("click",playPause,false);
-	seekslider.addEventListener("change",vidSeek,false);
+  pause.addEventListener("click",playPause,false);
+	play.addEventListener("click",playPause,false);
+  seekslider.addEventListener("change",vidSeek,false);
+	//seekslider.addEventListener("timeupdate",seektimeupdate,false);
 	vid.addEventListener("timeupdate",seektimeupdate,false);
   mutebtn.addEventListener("click",vidmute,false);
   volumeslider.addEventListener("change",setvolume,false);
@@ -1510,14 +1516,29 @@ function intializePlayer(){
 
 progress.addEventListener("change", vidSeek, false);
 
+seekbar.addEventListener("click", function(e){
+	currentTime = $this.vid.duration * (seekslider.value / 100);
+	progress = currentTime;
+})
 
-	//seekslider.addEventListener("change", function() {
-	//	var time = $vid[0].duration * ($seekslider[0].value / 100);
-	//	$vid[0].currentTime = time;
+
+//	seekslider.addEventListener("change", function() {
+//		var time = $vid[0].duration * ($seekslider[0].value / 100);
+//		$vid[0].currentTime = time;
 //	});
-	vid.addEventListener("timeupdate", function() {
- var newTime = vid.currentTime * (100 / vid.duration);
-	  progress.style.width = newTime+"%";
+
+vid.addEventListener("timeupdate", function() {
+var newTime = vid.currentTime * (100 / vid.duration);
+	progress.style.width = newTime+"%";
+
+});
+
+
+vid.addEventListener("timeupdate", function(){
+var endBuf = vid.buffered.end(0);
+var newTime = parseInt(((endBuf / vid.duration) * 100));
+//seekslider.innerHTML = soFar + '&';
+seekslider.style.width = newTime+"%";
 
 });
 
@@ -1572,16 +1593,6 @@ cc.addEventListener('click', function(e){
 })
 }
 
-
-
-window.onload = intializePlayer;
-
-
-var pause = document.getElementById("pause");
-var play = document.getElementById("play");
-
-
-
 function playPause(){
 	if(vid.paused) {
 		vid.play();
@@ -1601,10 +1612,15 @@ function playPause(){
 };
 
 
+window.onload = intializePlayer;
+
+
+
 for (var i = 0; i < vid.textTracks.length; i++) { //hide caption text-overflow
  vid.textTracks[i].mode = 'hidden';
 
 }
+
 
 function vidSeek(){
 	var seekto = vid.duration * (seekslider.value / 100);

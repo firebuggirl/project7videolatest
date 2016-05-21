@@ -405,6 +405,14 @@ each directive (in mixins partial) to dynamically create a class name for each k
   -webkit-box-sizing: border-box;
   box-sizing: border-box; }
 
+.clearfix:after {
+  visibility: hidden;
+  display: block;
+  font-size: 0;
+  content: " ";
+  clear: both;
+  height: 0; }
+
 body {
   font-family: 'Nunito', sans-serif;
   color: #384047;
@@ -433,7 +441,7 @@ div#video_controls_bar {
   div#video_controls_bar:hover {
     opacity: 1; }
 
-#seek {
+#seek-bar {
   display: block;
   width: auto;
   height: 10px;
@@ -443,7 +451,10 @@ div#video_controls_bar {
 #seekslider {
   position: absolute;
   width: 0;
-  height: 100%; }
+  height: 10px;
+  z-index: 55;
+  pointer-events: none;
+  /*background-color: $red;*/ }
 
 #progress {
   width: 0;
@@ -452,7 +463,8 @@ div#video_controls_bar {
   background-color: #ada89a;
   height: 10px;
   z-index: 5;
-  pointer-events: none; }
+  pointer-events: none;
+  /*margin-top: -10px;*/ }
 
 #flex--wrapper {
   display: flex;

@@ -16,7 +16,7 @@
 
    <div id="video-container" data-fullscreen="false">
 
-      <video id="my_video" >
+      <video id="my_video"  preload="metadata" poster="img/poster.jpg">
         <source src="video/video.mp4" type="video/mp4">
         <source src="video/video.ogg" type="video/ogg">
         <source src="video/video.webm" type="video/webm">
@@ -27,9 +27,9 @@
 
 
       <div id="video_controls_bar" data-state="hidden">
-        <div id="seek">
-           <div id="seekslider"></div>
-           <span id="progress"></span>
+        <div id="seek-bar">
+              <span id="seekslider"></span>
+              <span id="progress"></span>
         </div>
 
         <section id="flex--wrapper" >

@@ -17,7 +17,7 @@ $vidContainer.mouseleave(function () {
 
 
 
-//Add hightlights to text as video playpausebtn
+//Add hightlights to text as video plays
 
     $vid.on("timeupdate", function() {
   		var $videoTime = $vid[0].currentTime;
@@ -61,8 +61,6 @@ $vidContainer.mouseleave(function () {
   			}
 
   	});
-
-
 
 
   $("span").click(function(){
