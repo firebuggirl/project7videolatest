@@ -29,6 +29,9 @@
   @else if $point == large_screen {
     @media (min-width: 1280px) { @content; }
   }
+  @else if $point == mobile_large{
+    @media (max-width: 414px) { @content;}
+  }
   @else if $point == mobile {
     @media (max-width: 360px) { @content; }
     }
@@ -296,6 +299,12 @@
   background: transparent;
   border-color: transparent;
   color: transparent;
+}
+
+@mixin progress--buffer_bar{
+  position: absolute;
+	width: 0;
+  height: 10px;
 }
 
 @mixin video--center{

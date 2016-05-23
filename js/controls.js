@@ -1,8 +1,7 @@
 var $vidContainer = $("#video-container");
 var $controls = $('#flex--wrapper');
 var $vid = $('#my_video');
-var $seekbar = ('seek-bar');
-var seekslider = ('seekslider');
+
 
 
 /* Hide controls bar */

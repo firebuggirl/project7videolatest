@@ -25,6 +25,9 @@ body {
 #my_video{
   @include video--center;
   border: 3px solid $navy;
+  @include bp(mobile_large){
+    border: 1px solid $navy;
+  }
 }
 
 div#video_controls_bar{
@@ -50,25 +53,36 @@ div#video_controls_bar{
 }
 
 #seekslider {
-	position: absolute;
-	width: 0;
-	height: 10px;
-  /*z-index: 55;*/
-  pointer-events: none;
+	@include progress--buffer_bar;
   background-color: lighten($red, 20%);
-  max-width: 85%;
+  max-width: 87%;
+  @include bp(tablet){
+    max-width: 82%;
+
+  }
+  @include bp(mobile){
+    max-width: 80%;
+  }
+  @include bp(mobile_small){
+    margin-left: -2%;
+  }
 }
 
 #progress {
-  width: 0;
-  position: absolute;
+  @include progress--buffer_bar;
 	-webkit-appearance: none;
 	background-color: $ashy-beige;
-	height: 10px;
 	z-index: 5;
-	pointer-events: none;
-  max-width: 85%;
-  /*margin-top: -10px;*/
+  max-width: 87%;
+  @include bp(tablet){
+    max-width: 82%;
+  }
+  @include bp(mobile){
+    max-width: 80%;
+  }
+  @include bp(mobile_small){
+    margin-left: -2%;
+  }
 }
 
 

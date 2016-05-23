@@ -1413,8 +1413,7 @@ window.Modernizr = (function( window, document, undefined ) {
 var $vidContainer = $("#video-container");
 var $controls = $('#flex--wrapper');
 var $vid = $('#my_video');
-var $seekbar = ('seek-bar');
-var seekslider = ('seekslider');
+
 
 
 /* Hide controls bar */
@@ -1533,7 +1532,7 @@ function intializePlayer(){
     var percent = e.offsetX / this.offsetWidth;
     vid.currentTime = percent * vid.duration;
     seekslider.value = percent / 100;
-};
+}
 
 
 	stop.addEventListener('click', function(e) {
@@ -1583,7 +1582,7 @@ cc.addEventListener('click', function(e){
   track.mode = 'hidden'; //eles hide caption text
 }
 
-})
+});
 }
 
 
@@ -1612,7 +1611,7 @@ function playPause(){
 		return false;
 
 	}
-};
+}
 
 
 for (var i = 0; i < vid.textTracks.length; i++) { //hide caption text-overflow

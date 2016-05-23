@@ -431,6 +431,9 @@ body {
   height: 100%;
   width: 100%;
   border: 3px solid #232333; }
+  @media (max-width: 414px) {
+    #my_video {
+      border: 1px solid #232333; } }
 
 div#video_controls_bar {
   background: #232333;
@@ -453,21 +456,35 @@ div#video_controls_bar {
   position: absolute;
   width: 0;
   height: 10px;
-  /*z-index: 55;*/
-  pointer-events: none;
   background-color: #f64646;
-  max-width: 85%; }
+  max-width: 87%; }
+  @media (max-width: 768px) {
+    #seekslider {
+      max-width: 82%; } }
+  @media (max-width: 360px) {
+    #seekslider {
+      max-width: 80%; } }
+  @media (max-width: 320px) {
+    #seekslider {
+      margin-left: -2%; } }
 
 #progress {
-  width: 0;
   position: absolute;
+  width: 0;
+  height: 10px;
   -webkit-appearance: none;
   background-color: #ada89a;
-  height: 10px;
   z-index: 5;
-  pointer-events: none;
-  max-width: 85%;
-  /*margin-top: -10px;*/ }
+  max-width: 87%; }
+  @media (max-width: 768px) {
+    #progress {
+      max-width: 82%; } }
+  @media (max-width: 360px) {
+    #progress {
+      max-width: 80%; } }
+  @media (max-width: 320px) {
+    #progress {
+      margin-left: -2%; } }
 
 #flex--wrapper {
   display: flex;
