@@ -452,9 +452,10 @@ div#video_controls_bar {
   position: absolute;
   width: 0;
   height: 10px;
-  z-index: 55;
+  /*z-index: 55;*/
   pointer-events: none;
-  /*background-color: $red;*/ }
+  background-color: #f64646;
+  max-width: 85%; }
 
 #progress {
   width: 0;
@@ -464,6 +465,7 @@ div#video_controls_bar {
   height: 10px;
   z-index: 5;
   pointer-events: none;
+  max-width: 85%;
   /*margin-top: -10px;*/ }
 
 #flex--wrapper {

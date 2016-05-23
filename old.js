@@ -1,12 +1,16 @@
-var vid, playbtn, stop, seekslider, progress, curtimetext, durtimetext, mutebtn, volumeslider, fullscreenbtn, cc;
-function intializePlayer(){
+var vid, playbtn, pause, play, stop, seekslider, progress, seekbar ,curtimetext, durtimetext, mutebtn, volumeslider, fullscreenbtn, cc;
+function initializePlayer(){
 	// Set object references
 	vid = document.getElementById("my_video");
 	playbtn = document.getElementById("playpausebtn");
+	pause = document.getElementById("pause");
+	play = document.getElementById("play");
   stop = document.getElementById('stop');
   seekslider = document.getElementById("seekslider");
 
 	progress = document.getElementById("progress");
+
+	seekbar = document.getElementById("seek-bar");
 
   curtimetext = document.getElementById("curtimetext");
 	durtimetext = document.getElementById("durtimetext");
@@ -14,45 +18,65 @@ function intializePlayer(){
   volumeslider = document.getElementById("volumeslider");
   fullscreenbtn = document.getElementById("fullscreenbtn");
   cc = document.getElementById('cc');
-  //span = document.getElementsByTagName('span')[0].getAttribute("data-start");
   //var bufferedTimeRanges = vid.buffered;
+
+
 	// Add event listeners
 	playbtn.addEventListener("click",playPause,false);
-	seekslider.addEventListener("change",vidSeek,false);
+  pause.addEventListener("click",playPause,false);
+	play.addEventListener("click",playPause,false);
+  seekslider.addEventListener("change",vidSeek,false);
+	//seekslider.addEventListener("timeupdate",seektimeupdate,false);
 	vid.addEventListener("timeupdate",seektimeupdate,false);
   mutebtn.addEventListener("click",vidmute,false);
   volumeslider.addEventListener("change",setvolume,false);
   fullscreenbtn.addEventListener("click", toggleFullScreen, false);
+  progress.addEventListener("change", vidSeek, false);
 
-progress.addEventListener("change", vidSeek, false);
 
 
-	//seekslider.addEventListener("change", function() {
-	//	var time = $vid[0].duration * ($seekslider[0].value / 100);
-	//	$vid[0].currentTime = time;
-//	});
-	vid.addEventListener("timeupdate", function() {
- var newTime = vid.currentTime * (100 / vid.duration);
-	  progress.style.width = newTime+"%";
+seekbar.addEventListener("click", seek);//change currentTime and location of video to be equal to the value of the value clicked on seekbar
+
+ function seek(e) {
+    var percent = e.offsetX / this.offsetWidth;
+    vid.currentTime = percent * vid.duration;
+    seekbar.value = percent / 100;
+}
+
+
+
+vid.addEventListener("timeupdate", function() {
+var newTime = vid.currentTime * (100 / vid.duration);
+	progress.style.width = newTime+"%";
 
 });
+
+//updateBar=setInterval(update, 50);
+
+//function update(){
+  //  barSize = bar.offsetWidth;
+  //  if(!media.ended){
+  //      var size = parseInt((media.currentTime/media.duration)*barSize);
+//        progress.style.width = size +'px';
+//    }else{
+//        progress.style.width='0px';
+//        window.clearInterval(updateBar);
+//    }
+//    updateTimeDisplay();
+//}
+
 
 vid.addEventListener("timeupdate", function(){
 	 vid.max = vid.duration - 1;
 var endBuf = vid.buffered.end(0);
 var newTime = parseInt(((endBuf / vid.duration) * 100));
 //seekslider.innerHTML = soFar + '&';
-seekslider.style.width = newTime+"%";
+seekbar.style.width = newTime+"%";
 
 });
 
-seekslider.addEventListener("click", seek);//change currentTime and location of video to be equal to the value of the value clicked on seekbar
 
- function seek(e) {
-    var percent = e.offsetX / this.offsetWidth;
-    vid.currentTime = percent * vid.duration;
-    seekslider.value = percent / 100;
-}
+
 
 
 	stop.addEventListener('click', function(e) {
@@ -90,28 +114,22 @@ track.addCue(new VTTCue(57.780, 1.00, 'A few common residential modems are DSL o
 
 cc.addEventListener('click', function(e) { // hide caption text by default
 for (var i = 0; i > vid.textTracks.length; i--) {
-   track.mode = 'hidden';
+  track.mode = 'hidden';
+
  }
 });
+
 
 cc.addEventListener('click', function(e){
   if(track.mode === 'hidden'){
   track.mode = 'showing';//show caption text on #cc click
 
 } else {
-  track.mode = 'hidden'; //eles hide caption text
+  track.mode = 'hidden'; //else hide caption text
 }
 
 })
-}
-
-
-
-window.onload = intializePlayer;
-
-
-var pause = document.getElementById("pause");
-var play = document.getElementById("play");
+};
 
 
 
@@ -134,18 +152,29 @@ function playPause(){
 };
 
 
-for (var i = 0; i < vid.textTracks.length; i++) { //hide caption text-overflow
- vid.textTracks[i].mode = 'hidden';
+window.onload = initializePlayer;
 
-}
+
+
+//for (var i = 0; i < vid.textTracks.length; i++) { //hide caption text-overflow
+// vid.textTracks[i].mode = 'hidden';
+
+//}
+
+cc.addEventListener('click', function(e){
+	for (var i = 0; i < vid.textTracks.length; i++) { //hide caption text-overflow
+	 vid.textTracks[i].mode = 'hidden';
+
+	}
+});
 
 function vidSeek(){
-	var seekto = vid.duration * (seekslider.value / 100);
+	var seekto = vid.duration * (seekbar.value / 100);
 	vid.currentTime = seekto;
 }
 function seektimeupdate(){
 	var newTime = vid.currentTime * (100 / vid.duration);
-	seekslider.value = newTime;
+	seekbar.value = newTime;
   var curmins = Math.floor(vid.currentTime / 60);//get variable for current minutes by dividing vid.currentTime by 60 to round down # so that it's not a dedimal
 	var cursecs = Math.floor(vid.currentTime - curmins * 60);//divide current time - current minutes * 60 and round down
 	var durmins = Math.floor(vid.duration / 60);//video duration / 60 to get duration minutes
@@ -196,6 +225,8 @@ var cc = document.getElementById('cc');
 //for (var i = 0; i < vid.textTracks.length; i++) { //hide caption text-overflow
   // vid.textTracks[i].mode = 'hidden';
 //}
+
+
 
 cc.addEventListener('click', function(e) { //show caption text
  for (var i = 0; i < vid.textTracks.length; i++) {
