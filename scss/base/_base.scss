@@ -24,6 +24,7 @@ body {
 }
 #my_video{
   @include video--center;
+  border: 3px solid $navy;
 }
 
 div#video_controls_bar{
