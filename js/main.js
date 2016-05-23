@@ -7,48 +7,42 @@ function intializePlayer(){
   seekslider = document.getElementById("seekslider");
   seekbar = document.getElementById('seek-bar');
 	progress = document.getElementById("progress");
-
   curtimetext = document.getElementById("curtimetext");
 	durtimetext = document.getElementById("durtimetext");
   mutebtn = document.getElementById("mutebtn");
   volumeslider = document.getElementById("volumeslider");
   fullscreenbtn = document.getElementById("fullscreenbtn");
   cc = document.getElementById('cc');
-  //span = document.getElementsByTagName('span')[0].getAttribute("data-start");
-  //var bufferedTimeRanges = vid.buffered;
-	// Add event listeners
+
+	//Add event listeners
+
 	playbtn.addEventListener("click",playPause,false);
-//	seekslider.addEventListener("change",vidSeek,false);
+  //seekslider.addEventListener("change",vidSeek,false);
 	vid.addEventListener("timeupdate",seektimeupdate,false);
   mutebtn.addEventListener("click",vidmute,false);
   volumeslider.addEventListener("change",setvolume,false);
   fullscreenbtn.addEventListener("click", toggleFullScreen, false);
+  progress.addEventListener("change", vidSeek, false);
 
-progress.addEventListener("change", vidSeek, false);
 
-
-	//seekslider.addEventListener("change", function() {
-	//	var time = $vid[0].duration * ($seekslider[0].value / 100);
-	//	$vid[0].currentTime = time;
-//	});
 	vid.addEventListener("timeupdate", function() {
- var newTime = vid.currentTime * (100 / vid.duration);
+    var newTime = vid.currentTime * (100 / vid.duration);
 	  progress.style.width = newTime+"%";
 
 });
 
-vid.addEventListener("timeupdate", function(){//display buffer bar as video loads
-	 vid.max = vid.duration - 1;
-   var endBuf = vid.buffered.end(0);
-   var newTime = parseInt(((endBuf / vid.duration) * 100));
-   //seekslider.innerHTML = soFar + '&';
-   seekslider.style.width = newTime+"%";
+  vid.addEventListener("timeupdate", function(){//display buffer bar as video loads
+		 vid.max = vid.duration - 1;
+	   var endBuf = vid.buffered.end(0);
+	   var newTime = parseInt(((endBuf / vid.duration) * 100));
+	   //seekslider.innerHTML = soFar + '&';
+	   seekslider.style.width = newTime+"%";
 
 });
 
-seekbar.addEventListener("click", seek);//change currentTime and location of video to be equal to the value of the value clicked on seekbar
+ seekbar.addEventListener("click", seek);//change currentTime and location of video to be equal to the value of the value clicked on seekbar
 
- function seek(e) {
+    function seek(e) {
 
     var percent = e.offsetX / this.offsetWidth;
     vid.currentTime = percent * vid.duration;
