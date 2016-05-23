@@ -1484,14 +1484,14 @@ $vidContainer.mouseleave(function () {
 
                      //https://msdn.microsoft.com/en-us/library/hh924823%28v=vs.85%29.aspx
 
-var vid, playbtn, stop, seekslider, progress, curtimetext, durtimetext, mutebtn, volumeslider, fullscreenbtn, cc;
+var vid, playbtn, stop, seekbar, seekslider, progress, curtimetext, durtimetext, mutebtn, volumeslider, fullscreenbtn, cc;
 function intializePlayer(){
 	// Set object references
 	vid = document.getElementById("my_video");
 	playbtn = document.getElementById("playpausebtn");
   stop = document.getElementById('stop');
   seekslider = document.getElementById("seekslider");
-
+  seekbar = document.getElementById('seek-bar');
 	progress = document.getElementById("progress");
 
   curtimetext = document.getElementById("curtimetext");
@@ -1504,7 +1504,7 @@ function intializePlayer(){
   //var bufferedTimeRanges = vid.buffered;
 	// Add event listeners
 	playbtn.addEventListener("click",playPause,false);
-	seekslider.addEventListener("change",vidSeek,false);
+//	seekslider.addEventListener("change",vidSeek,false);
 	vid.addEventListener("timeupdate",seektimeupdate,false);
   mutebtn.addEventListener("click",vidmute,false);
   volumeslider.addEventListener("change",setvolume,false);
@@ -1532,13 +1532,14 @@ seekslider.style.width = newTime+"%";
 
 });
 
-seekslider.addEventListener("click", seek);//change currentTime and location of video to be equal to the value of the value clicked on seekbar
+seekbar.addEventListener("click", seek);//change currentTime and location of video to be equal to the value of the value clicked on seekbar
 
  function seek(e) {
+
     var percent = e.offsetX / this.offsetWidth;
     vid.currentTime = percent * vid.duration;
-    seekslider.value = percent / 100;
-}
+   seekslider.value = percent / 100;
+};
 
 
 	stop.addEventListener('click', function(e) {
