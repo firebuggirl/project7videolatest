@@ -301,9 +301,15 @@
   color: transparent;
 }
 
-@mixin progress--buffer_bar{
+@mixin progressBar{
   position: absolute;
 	width: 0;
+  height: 10px;
+}
+
+@mixin bufferBar{
+  position: relative;
+  width: 0;
   height: 10px;
 }
 

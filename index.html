@@ -32,18 +32,20 @@
             <span  id="progress"></span>
         </div>
 
-        <section id="flex--wrapper" >
+        <div id="flex--wrapper" >
             <div id="flex--margin_right">
               <button id="playpausebtn"><img id="play" src="icons/play-icon.png" alt="play"/><img id="pause" src="icons/pause-icon.png" alt="pause"/></button>
-              <span class="time" id="curtimetext">00:00:</span><span class="time" id="durtimetext">00:00</span>
+              <span class="time" id="curtimetext">00:00</span><span class="time" id="durtimetext">00:00</span>
             </div>
 
+            <button id="speed" type="button" class="speed-btn"><img src ="icons/ff.png" alt="fast forward"/></button>
             <button id="stop" type="button" data-state="stop"><img src="icons/replay-icon.png" alt="replay"/></button>
             <button id="mutebtn" data-state="mute"></button>
             <input id="volumeslider" type="range" min="0" max="100" value="100" step="1">
             <button id="cc" type="button" data-state="subtitles"></button>
             <button id="fullscreenbtn"><img src = "icons/fullscreen-icon.png" alt="fullscreen"/></button>
-        </section>
+
+        </div>
     </div>
   </div>
 

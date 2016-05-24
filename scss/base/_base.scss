@@ -22,6 +22,7 @@ body {
   border-radius: 8px;
 
 }
+
 #my_video{
   @include video--center;
   border: 3px solid $navy;
@@ -44,41 +45,37 @@ div#video_controls_bar{
 
 
 
+
 #seek-bar{
   display: block;
   width: auto;
   height: 10px;
   background-color: $red;
   opacity: 0.7;
+  @include  bp(mobile_large){
+    margin-bottom: 3%;
+  }
 }
 
 #seekslider {
-	@include progress--buffer_bar;
+@include bufferBar;
   background-color: lighten($red, 20%);
-  max-width: 87%;
-  @include bp(tablet){
-    max-width: 82%;
 
-  }
-  @include bp(mobile){
-    max-width: 80%;
-  }
-  @include bp(mobile_small){
-    margin-left: -2%;
-  }
 }
 
 #progress {
-  @include progress--buffer_bar;
+  @include progressBar;
 	-webkit-appearance: none;
 	background-color: $ashy-beige;
 	z-index: 5;
+  margin-top: -10px;
   max-width: 87%;
   @include bp(tablet){
     max-width: 82%;
   }
   @include bp(mobile){
     max-width: 80%;
+    margin-left: -1%;
   }
   @include bp(mobile_small){
     margin-left: -2%;
@@ -121,6 +118,17 @@ button#playpausebtn{
 #stop{
   @include stop;
   opacity: 0.7;
+  &:hover{
+    opacity: 1;
+  }
+}
+
+#speed{
+  @include stop;
+  opacity: 0.7;
+  @include bp(mobile_large){
+    display: none;
+  }
   &:hover{
     opacity: 1;
   }

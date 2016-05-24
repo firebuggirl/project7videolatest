@@ -451,22 +451,15 @@ div#video_controls_bar {
   height: 10px;
   background-color: #cc0a0a;
   opacity: 0.7; }
+  @media (max-width: 414px) {
+    #seek-bar {
+      margin-bottom: 3%; } }
 
 #seekslider {
-  position: absolute;
+  position: relative;
   width: 0;
   height: 10px;
-  background-color: #f64646;
-  max-width: 87%; }
-  @media (max-width: 768px) {
-    #seekslider {
-      max-width: 82%; } }
-  @media (max-width: 360px) {
-    #seekslider {
-      max-width: 80%; } }
-  @media (max-width: 320px) {
-    #seekslider {
-      margin-left: -2%; } }
+  background-color: #f64646; }
 
 #progress {
   position: absolute;
@@ -475,13 +468,15 @@ div#video_controls_bar {
   -webkit-appearance: none;
   background-color: #ada89a;
   z-index: 5;
+  margin-top: -10px;
   max-width: 87%; }
   @media (max-width: 768px) {
     #progress {
       max-width: 82%; } }
   @media (max-width: 360px) {
     #progress {
-      max-width: 80%; } }
+      max-width: 80%;
+      margin-left: -1%; } }
   @media (max-width: 320px) {
     #progress {
       margin-left: -2%; } }
@@ -528,6 +523,20 @@ button#playpausebtn {
   background-color: transparent;
   opacity: 0.7; }
   #stop:hover {
+    opacity: 1; }
+
+#speed {
+  border: none;
+  width: 34px;
+  height: 28px;
+  cursor: pointer;
+  opacity: 0.7;
+  background-color: transparent;
+  opacity: 0.7; }
+  @media (max-width: 414px) {
+    #speed {
+      display: none; } }
+  #speed:hover {
     opacity: 1; }
 
 button#cc {
@@ -633,7 +642,7 @@ html:-ms-fullscreen {
 /*@import "footer";*/
 @media (max-width: 786px) {
   #flex--margin_right {
-    margin-right: 30%; } }
+    margin-right: 7%; } }
 @media (max-width: 435px) {
   body {
     background-color: #ada89a; }

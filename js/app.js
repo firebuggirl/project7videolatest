@@ -1483,11 +1483,12 @@ $vidContainer.mouseleave(function () {
 
                      //https://msdn.microsoft.com/en-us/library/hh924823%28v=vs.85%29.aspx
 
-var vid, playbtn, stop, seekbar, seekslider, progress, curtimetext, durtimetext, mutebtn, volumeslider, fullscreenbtn, cc;
+var vid, playbtn, speedInc, stop, seekbar, seekslider, progress, curtimetext, durtimetext, mutebtn, volumeslider, fullscreenbtn, cc, VTTCue;
 function intializePlayer(){
 	// Set object references
 	vid = document.getElementById("my_video");
 	playbtn = document.getElementById("playpausebtn");
+	speedInc = document.getElementById("speed");
   stop = document.getElementById('stop');
   seekslider = document.getElementById("seekslider");
   seekbar = document.getElementById('seek-bar');
@@ -1514,16 +1515,18 @@ function intializePlayer(){
     var newTime = vid.currentTime * (100 / vid.duration);
 	  progress.style.width = newTime+"%";
 
+
 });
 
   vid.addEventListener("timeupdate", function(){//display buffer bar as video loads
-		 vid.max = vid.duration - 1;
-	   var endBuf = vid.buffered.end(0);
-	   var newTime = parseInt(((endBuf / vid.duration) * 100));
-	   //seekslider.innerHTML = soFar + '&';
-	   seekslider.style.width = newTime+"%";
+		 //vid.max = vid.duration - 1;
+	  var endBuf = vid.buffered.end(0);
+	  var newTime = parseInt(((endBuf / vid.duration) * 100));
+    seekslider.style.width = newTime+"%";
 
 });
+
+
 
  seekbar.addEventListener("click", seek);//change currentTime and location of video to be equal to the value of the value clicked on seekbar
 
@@ -1533,6 +1536,15 @@ function intializePlayer(){
     vid.currentTime = percent * vid.duration;
     seekslider.value = percent / 100;
 }
+
+speedInc.addEventListener("click", function(e){
+	if (vid.playbackRate === 1.0){
+	vid.playbackRate = 2.0;
+} else if (vid.playbackRate === 2.0) {
+	vid.playbackRate = 1.0;
+
+}
+});
 
 
 	stop.addEventListener('click', function(e) {
@@ -1614,10 +1626,6 @@ function playPause(){
 }
 
 
-for (var i = 0; i < vid.textTracks.length; i++) { //hide caption text-overflow
- vid.textTracks[i].mode = 'hidden';
-
-}
 
 function vidSeek(){
 	var seekto = vid.duration * (seekslider.value / 100);
@@ -1670,15 +1678,3 @@ function toggleFullScreen(){
 		vid.mozRequestFullScreen();
 	}
 }
-
-var cc = document.getElementById('cc');
-
-//for (var i = 0; i < vid.textTracks.length; i++) { //hide caption text-overflow
-  // vid.textTracks[i].mode = 'hidden';
-//}
-
-cc.addEventListener('click', function(e) { //show caption text
- for (var i = 0; i < vid.textTracks.length; i++) {
-  vid.textTracks[i].mode = 'showing';
- }
-});
